@@ -5,7 +5,7 @@ import { Navbar } from "@/components/global/navbar";
 import { Footer } from "@/components/global/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "./providers";
-
+import "@rainbow-me/rainbowkit/styles.css";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
