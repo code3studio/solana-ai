@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import ModeToggle from "./darkmode";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -36,7 +37,7 @@ export function Navbar() {
               {route.label}
             </Link>
           ))}
-          <Button>Sign up</Button>
+          <ConnectButton />
           <ModeToggle />
         </div>
 
