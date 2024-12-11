@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import ModeToggle from "./darkmode";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -36,10 +37,11 @@ export function Navbar() {
             </Link>
           ))}
           <Button>Sign up</Button>
+          <ModeToggle />
         </div>
 
         {/* Mobile Menu */}
-        <div className="md:hidden ml-auto">
+        <div className="md:hidden flex ml-auto">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -62,6 +64,7 @@ export function Navbar() {
               </div>
             </SheetContent>
           </Sheet>
+          <ModeToggle />
         </div>
       </div>
     </nav>
