@@ -9,7 +9,7 @@ const ContactPageAnimation = () => {
 
   const handleMouseMove = useCallback(
     (event: {
-      currentTarget: { getBoundingClientRect: () => any };
+      currentTarget: { getBoundingClientRect: () => DOMRect };
       clientX: number;
       clientY: number;
     }) => {
