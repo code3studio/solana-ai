@@ -68,8 +68,8 @@ const ContactPage: React.FC = () => {
     }
   };
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center p-4 overflow-hidden">
-      <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 overflow-hidden">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between">
         <motion.div
           className="lg:w-1/2 mb-8 lg:mb-0"
           initial={{ opacity: 0, x: -100 }}
