@@ -4,8 +4,10 @@ import "./globals.css";
 import { Navbar } from "@/components/global/navbar";
 import { Footer } from "@/components/global/footer";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Providers } from "./providers";
+// import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
+import { Toaster } from "@/components/ui/toaster";
+import AppWalletProvider from "@/components/AppWalletProvider";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -32,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
+        <AppWalletProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -42,8 +44,9 @@ export default function RootLayout({
             <Navbar />
             <main className="min-h-screen pt-16">{children}</main>
             <Footer />
+            <Toaster />
           </ThemeProvider>
-        </Providers>
+          </AppWalletProvider>
       </body>
     </html>
   );

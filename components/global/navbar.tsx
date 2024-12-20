@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import ModeToggle from "./darkmode";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -37,7 +37,14 @@ export function Navbar() {
               {route.label}
             </Link>
           ))}
-          <ConnectButton />
+          <WalletMultiButton
+            style={{
+              backgroundColor: "var(--geist-foreground)",
+              color: "var(--geist-background)",
+              scale: "small",
+              padding: "0.5rem 1rem",
+            }}
+          />
           <ModeToggle />
         </div>
 
@@ -66,6 +73,7 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
           <ModeToggle />
+          <WalletMultiButton />
         </div>
       </div>
     </nav>
