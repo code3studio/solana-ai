@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/global/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
-// import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "@/components/ui/toaster";
 import AppWalletProvider from "@/components/AppWalletProvider";
