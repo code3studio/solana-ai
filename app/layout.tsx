@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/global/navbar";
 import { Footer } from "@/components/global/footer";
 import { ThemeProvider } from "@/components/theme-provider";
-// import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "@/components/ui/toaster";
 import AppWalletProvider from "@/components/AppWalletProvider";
@@ -46,7 +45,7 @@ export default function RootLayout({
             <Footer />
             <Toaster />
           </ThemeProvider>
-          </AppWalletProvider>
+        </AppWalletProvider>
       </body>
     </html>
   );
