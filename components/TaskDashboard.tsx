@@ -68,14 +68,9 @@ const TaskDashboard = () => {
 
   if (isLoading) {
     return (
-      <Card className="max-w-4xl mx-auto mt-8">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin" />
-            <span className="ml-2">Loading task...</span>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
     );
   }
 
