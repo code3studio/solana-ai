@@ -10,7 +10,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 const routes = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
+  { href: "/tasks", label: "Tasks" },
   { href: "/contact", label: "Contact" },
 ];
 

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { CreateChallenge } from "@/components/create-challenge";
+import CreateChallenge from "@/components/create-challenge";
 import { ChallengeList } from "@/components/challenge-list";
 import { Skeleton } from "@/components/ui/skeleton";
 
