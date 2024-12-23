@@ -1,81 +1,123 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
 
-const BackgroundBeamsWithCollisionDemo = () => {
+export default function LandingPage() {
   return (
-    <div className="min-h-screen w-full overflow-hidden">
-      <main>
-        <section className="min-h-screen flex flex-col justify-center items-center relative">
+    <div className="min-h-screen w-full bg-gradient-to-br from-black to-gray-800 text-gray-100 antialiased">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <section className="pt-20 sm:pt-32">
           <motion.h1
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-6xl md:text-8xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
+            transition={{ duration: 0.8 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400"
           >
-            AI Image Generation on Solana
+            Web3 Innovators Hub
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-xl md:text-2xl text-center mb-12 text-black/80 dark:text-white/80 max-w-2xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-xl sm:text-2xl max-w-3xl mx-auto mb-10 text-gray-300 text-center"
           >
-            Create stunning AI-generated images instantly for just 0.01 SOL.
-            Fast, secure, and powered by Solana blockchain.
+            Participate in AI-driven Web3 challenges, build solutions, and
+            secure instant crypto rewards.
           </motion.p>
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex justify-center mb-20 sm:mb-32"
           >
-            <Link href={"/generate"}>
-              <Button className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition duration-300">
-                Generate Image • 0.01 SOL
-              </Button>
+            <Link
+              href="#"
+              className="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-gray-100 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Get Started
             </Link>
           </motion.div>
         </section>
 
-        <section className="py-12 lg:py-24">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              Why Choose Our Platform?
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="p-6 rounded-lg backdrop-blur-sm bg-white/10">
-                <h3 className="text-xl font-bold mb-4">Lightning Fast</h3>
-                <p className="text-black/80 dark:text-white/80">
-                  Generate images in seconds with Solana&apos;s rapid
-                  transaction speed
-                </p>
-              </div>
-              <div className="p-6 rounded-lg backdrop-blur-sm bg-white/10">
-                <h3 className="text-xl font-bold mb-4">Cost Effective</h3>
-                <p className="text-black/80 dark:text-white/80">
-                  Only 0.01 SOL per generation, making creativity accessible
-                </p>
-              </div>
-              <div className="p-6 rounded-lg backdrop-blur-sm bg-white/10">
-                <h3 className="text-xl font-bold mb-4">Secure & Reliable</h3>
-                <p className="text-black/80 dark:text-white/80">
-                  Built on Solana blockchain for maximum security and
-                  reliability
-                </p>
-              </div>
-            </div>
-            <Link href={"/gallery"}>
-              <Button className="bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition duration-300">
-                View Gallery
-              </Button>
-            </Link>
+        {/* How It Works Section */}
+        <section className="pb-20">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+            How It Works
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Dynamic AI Challenges",
+                description:
+                  "Unlock cutting-edge Web3 problems designed to push your skills to new heights.",
+                icon: "⚡",
+              },
+              {
+                title: "AI-Powered Evaluation",
+                description:
+                  "Submit your solutions and receive immediate AI-driven feedback and scoring.",
+                icon: "🧠",
+              },
+              {
+                title: "Crypto Rewards",
+                description:
+                  "Compete and win! Top developers earn prizes sent instantly via smart contracts.",
+                icon: "🌟",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <Card className="h-full p-6 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-700">
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-bold mb-4 text-gray-200">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400">{item.description}</p>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </section>
+
+        {/* Footer Section */}
+        <footer className="py-20 text-center">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400"
+          >
+            Join the Revolution in Web3 Development
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-lg text-gray-300 max-w-3xl mx-auto mb-10"
+          >
+            Whether you are a seasoned developer or a beginner test your skills
+            learn and grow while earning crypto rewards.
+          </motion.p>
+          <Link
+            href="#"
+            className="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-gray-100 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            Start Innovating
+          </Link>
+        </footer>
       </main>
     </div>
   );
-};
-
-export default BackgroundBeamsWithCollisionDemo;
+}
