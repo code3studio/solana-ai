@@ -1,6 +1,7 @@
 // types.ts
 export interface Tweet {
   id: string;
+  author_id: string;
   text: string;
   author: string;
   authorName: string;

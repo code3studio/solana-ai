@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Award, Clock, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Task } from "@/types/challenge";
+import TwitterSubmissionForm from "@/components/TwitterSubmissionForm";
 
 const TaskById = ({ params }: { params: { id: string } }) => {
   const [task, setTask] = useState<Task | null>(null);
@@ -28,6 +29,7 @@ const TaskById = ({ params }: { params: { id: string } }) => {
         const response = await fetch(`/api/tasks/active/${params.id}`);
         if (!response.ok) throw new Error("Task not found");
         const data = await response.json();
+        console.log(data);
         setTask(data.task);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to fetch task");
@@ -60,75 +62,108 @@ const TaskById = ({ params }: { params: { id: string } }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+        <Loader2 className="h-12 w-12 animate-spin text-purple-600" />
       </div>
     );
   }
 
   if (error || !task) {
     return (
-      <Card className="max-w-4xl mx-auto mt-8">
-        <CardContent className="p-6">
-          <div className="text-center">
-            <p className="text-red-500">{error || "Task not found"}</p>
-            <Link href="/" className="mt-4 inline-block">
-              <Button variant="outline">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Dashboard
-              </Button>
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 p-6">
+        <Card className="max-w-4xl mx-auto mt-8 border-red-200 shadow-lg">
+          <CardContent className="p-8">
+            <div className="text-center space-y-4">
+              <p className="text-red-500 text-lg font-medium">
+                {error || "Task not found"}
+              </p>
+              <Link href="/">
+                <Button variant="outline" className="hover:bg-red-50">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Dashboard
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Link href="/">
-        <Button variant="outline" className="mb-6">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Dashboard
-        </Button>
-      </Link>
-
-      <Card className="bg-gradient-to-r from-purple-500/5 to-blue-500/5">
-        <CardHeader>
-          <CardTitle className="text-2xl">{task.title}</CardTitle>
-          <CardDescription>{task.description}</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="flex items-center space-x-2 text-green-600">
-            <Award className="h-5 w-5" />
-            <span className="font-medium">
-              Reward: {task.rewards.usdcAmount} USDC
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-2 text-blue-600">
-            <Clock className="h-5 w-5" />
-            <span className="font-medium">
-              {timeLeft
-                ? `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`
-                : "Calculating..."}
-            </span>
-          </div>
-
-          <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-4">
-            <h3 className="font-semibold mb-2">Task Requirements:</h3>
-            <ul className="list-disc list-inside space-y-2">
-              {task.requirements?.map((req, index) => (
-                <li key={index}>{req}</li>
-              ))}
-            </ul>
-          </div>
-
-          <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-            Start Challenge
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <div className="max-w-7xl mx-auto p-6 space-y-8">
+        <Link href="/">
+          <Button
+            variant="outline"
+            className="mb-6 hover:bg-white/90 shadow-sm"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Dashboard
           </Button>
-        </CardContent>
-      </Card>
+        </Link>
+
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <Card className="bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm border border-purple-100 dark:border-purple-900 shadow-xl">
+            <CardHeader className="space-y-4 p-8">
+              <div className="space-y-2">
+                <CardTitle className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  {task.title}
+                </CardTitle>
+                <CardDescription className="text-xl font-medium text-gray-600 dark:text-gray-300">
+                  {task.description}
+                </CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-8 p-8 pt-0">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+                <div className="flex items-center space-x-3 bg-green-50 dark:bg-green-900/30 p-3 rounded-lg">
+                  <Award className="h-6 w-6 text-green-600 dark:text-green-400" />
+                  <span className="font-semibold text-xl text-green-700 dark:text-green-300">
+                    {task.rewards.usdcAmount} USDC
+                  </span>
+                </div>
+
+                <div className="flex items-center space-x-3 bg-blue-50 dark:bg-blue-900/30 p-3 rounded-lg">
+                  <Clock className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <span className="font-semibold text-xl text-blue-700 dark:text-blue-300">
+                    {timeLeft
+                      ? `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`
+                      : "Calculating..."}
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-purple-50/50 dark:bg-gray-800/50 rounded-xl p-6 shadow-inner">
+                <h3 className="font-bold text-xl mb-6 text-purple-900 dark:text-purple-100">
+                  Task Requirements
+                </h3>
+                <ul className="space-y-4">
+                  {task.requirements?.map((req, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start space-x-3 text-gray-700 dark:text-gray-200"
+                    >
+                      <span className="flex-shrink-0 w-6 h-6 bg-purple-200 dark:bg-purple-800 rounded-full flex items-center justify-center text-sm font-medium">
+                        {index + 1}
+                      </span>
+                      <span className="text-lg">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-6">
+            <Card className="border border-purple-100 dark:border-purple-900 shadow-xl bg-white/80 dark:bg-gray-800/90">
+              <CardContent className="p-8">
+                <TwitterSubmissionForm task={task} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

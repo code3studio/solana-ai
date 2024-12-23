@@ -24,6 +24,7 @@ export function adaptTwitterResponse(response: TwitterApiTweet): Tweet {
     id: data.id,
     text: data.text,
     author: author?.username || 'unknown',
+    author_id: data.author_id,
     authorName: author?.name || 'Unknown User',
     authorImage: author?.profile_image_url || '',
     stats,
