@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import ModeToggle from "./darkmode";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import Image from "next/image";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -22,7 +23,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center px-4">
         <div className="flex items-center space-x-4">
           <Link href="/" className="font-bold text-xl">
-            Logo
+            <Image src={"/solana-logo.png"} width={40} height={40} alt="Logo" />
           </Link>
         </div>
 
