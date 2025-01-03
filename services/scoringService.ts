@@ -101,9 +101,7 @@ export class ScoringService {
     const db = client.db('tweetcontest');
 
     let winners = [
-      { tweetId: '', totalScore: 0 },
-      { tweetId: '', totalScore: 0 },
-      { tweetId: '', totalScore: 0 }
+      { tweetId: '', totalScore: 0, },
     ];
     // get top 3 entries based on total score
     const entries = await db.collection('entries')

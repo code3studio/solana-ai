@@ -12,6 +12,6 @@ export async function checkEndedContests() {
   }).toArray();
 
   for (const task of endedTasks) {
-    await ScoringService.determineWinners(task._id.toString());
+    await ScoringService.determineWinners(task._id);
   }
 }
