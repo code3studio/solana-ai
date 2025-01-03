@@ -61,17 +61,17 @@ function getUserEmailTemplate(name: string): string {
         <body>
           <div class="container">
             <div class="header">
-              <h1>Thank You for Contacting {company name}</h1>
+              <h1>Thank You for Contacting Bounty Quest</h1>
             </div>
             <div class="content">
               <p>Dear ${name},</p>
-              <p>Thank you for reaching out to {company name}. We have received your message and appreciate your interest in our services.</p>
+              <p>Thank you for reaching out to Bounty Quest. We have received your message and appreciate your interest in our services.</p>
               <p>Our team will review your inquiry and get back to you as soon as possible, usually within 1-2 business days.</p>
-              <p>In the meantime, feel free to explore our website for more information about our services and available chefs.</p>
-              <p>Best regards,<br>The {company name} Team</p>
+              <p>In the meantime, feel free to explore our website for more information about ideas and tokens.</p>
+              <p>Best regards,<br>The Bounty Quest Team</p>
             </div>
             <div class="footer">
-              <p>&copy; 2024 {company name}. All rights reserved.</p>
+              <p>&copy; 2024 Bounty Quest. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -104,7 +104,7 @@ function getUserEmailTemplate(name: string): string {
               <p>${message}</p>
             </div>
             <div class="footer">
-              <p>&copy; 2024 {company name}. All rights reserved.</p>
+              <p>&copy; 2024 Bounty Quest. All rights reserved.</p>
             </div>
           </div>
         </body>
