@@ -18,7 +18,7 @@ export class TaskGeneratorService {
     const prompt = `
       Generate a creative Twitter task related to one of these categories: blockchain, memes, or NFTs.
       The task should be engaging, clear, and encourage creative responses.
-      
+      Return ONLY a valid JSON object with no additional text or explanation.
       Provide the response in this JSON format:
       {
         "title": "task title",
