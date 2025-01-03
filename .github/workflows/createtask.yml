@@ -2,7 +2,7 @@ name: Create Task
 
 on:
   schedule:
-    - cron: "0 9 * * *" # Runs every 5 minutes
+    - cron: "*/5 * * * *" # Runs every 5 minutes
 
 jobs:
   test-cron-job:
@@ -13,7 +13,9 @@ jobs:
         run: echo "Cron job executed at $(date)"
 
       - name: Call API
+        env:
+          API_URL: ${{ secrets.CREATE_TASK_API }}
         run: |
-          curl -X POST "https://solana-ai-alpha.vercel.app/api/tasks/create" \
+          curl -X POST "$CREATE_TASK_API" \
           -H "Content-Type: application/json" \
           -d '{"durationHours": 21}'
