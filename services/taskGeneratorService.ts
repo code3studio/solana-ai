@@ -18,8 +18,8 @@ export class TaskGeneratorService {
     const prompt = `
       Generate a creative Twitter task related to one of these categories: blockchain, memes, or NFTs.
       The task should be engaging, clear, and encourage creative responses.
-      Return ONLY a valid JSON object with no additional text or explanation.
-      Provide the response in this JSON format:
+      Return ONLY a valid JSON object with no additional text, markdown or explanation. It should start with an opening curly brace '{' and end with a closing curly brace '}'.
+      The JSON must strictly follow this format:
       {
         "title": "task title",
         "description": "clear task description",
@@ -27,7 +27,7 @@ export class TaskGeneratorService {
         "requirements": ["list of specific requirements"],
         "evaluationCriteria": ["specific criteria for judging"]
         "rewards": {
-          "usdcAmount": "number between 100-1000",
+          "usdcAmount": "any number from 1 to 1000",
           "nftReward": "optional NFT reward"
         }
 
@@ -38,6 +38,7 @@ export class TaskGeneratorService {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
+    console.log('AI response:', response.text());
     return JSON.parse(response.text());
   }
 
