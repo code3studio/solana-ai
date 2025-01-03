@@ -38,7 +38,6 @@ export class TaskGeneratorService {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    console.log('AI response:', response.text());
     return JSON.parse(response.text());
   }
 
