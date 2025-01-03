@@ -16,4 +16,4 @@ jobs:
         env:
           API_URL: ${{ secrets.CHECK_TASK_API }}
         run: |
-          curl -X GET "$CHECK_TASK_API" -H "Content-Type: application/json"
+          curl -X GET "$API_URL" -H "Content-Type: application/json"

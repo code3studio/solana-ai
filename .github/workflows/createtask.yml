@@ -16,6 +16,6 @@ jobs:
         env:
           API_URL: ${{ secrets.CREATE_TASK_API }}
         run: |
-          curl -X POST "$CREATE_TASK_API" \
+          curl -X POST "$API_URL" \
           -H "Content-Type: application/json" \
           -d '{"durationHours": 21}'
