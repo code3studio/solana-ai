@@ -74,4 +74,34 @@ export class TaskGeneratorService {
     const db = client.db('tweetcontest');
     return db.collection('tasks').findOne({ _id: new ObjectId(taskId) });
   }
+
+  public static async setTaskInactive(taskId: string) {
+    const client = await clientPromise;
+    const db = client.db('tweetcontest');
+    return db.collection('tasks').updateOne(
+      { _id: new ObjectId(taskId) },
+      { $set: { isActive: false } }
+    );
+  }
+
+  public static async setTaskWinner(taskId: string, winnerId: string) {
+    const client = await clientPromise;
+    const db = client.db('tweetcontest');
+    return db.collection('tasks').updateOne(
+      { _id: new ObjectId(taskId) },
+      { $set: { winners: winnerId } }
+    );
+  }
+
+  // write a method to set the task as inactive if the end time has passed
+  public static async checkTaskStatus() {
+    const client = await clientPromise;
+    const db = client.db('tweetcontest');
+    const currentTime = new Date();
+
+    return db.collection('tasks').updateMany(
+      { endTime: { $lt: currentTime } },
+      { $set: { isActive: false } }
+    );
+  }
 }
