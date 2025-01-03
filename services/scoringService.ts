@@ -96,20 +96,26 @@ export class ScoringService {
     return entry;
   }
 
-  public static async determineWinners(taskId: string): Promise<void> {
+  public static async determineWinners(taskId: object): Promise<void> {
     const client = await clientPromise;
     const db = client.db('tweetcontest');
 
-    // Get top 3 entries by total score
-    const winners = await db.collection('entries')
-      .find({ taskId, evaluated: true })
+    let winners = [
+      { tweetId: '', totalScore: 0, },
+    ];
+    // get top 3 entries based on total score
+    const entries = await db.collection('entries')
+      .find({ taskId })
       .sort({ totalScore: -1 })
       .limit(3)
       .toArray();
 
+    if (entries.length > 0) {
+
+    }
     // Update task with winners
     await db.collection('tasks').updateOne(
-      { _id: new ObjectId(taskId) },
+      { _id: taskId },
       {
         $set: {
           winners: winners.map(w => w.tweetId),

@@ -53,3 +53,26 @@ export async function POST(request: Request) {
     );
   }
 }
+
+// evaluate and determine winners
+export async function GET() {
+  try {
+    const client = await clientPromise;
+    const db = client.db('tweetcontest');
+    const tasks = await db.collection('tasks').find().toArray();
+    for (const task of tasks) {
+      if (!task.isActive) {
+        await ScoringService.determineWinners(task._id);
+      }
+    }
+
+    // return response as winner names if their no return "No winners found"
+    return NextResponse.json({ message: 'Winners determined successfully' }, { status: 200 });
+  } catch (error) {
+    console.error('Error determining winners:', error);
+    return NextResponse.json(
+      { error: 'Failed to determine winners' },
+      { status: 500 }
+    );
+  }
+}

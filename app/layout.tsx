@@ -19,7 +19,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Solana ai",
+  title: "Bounty Quest",
   description: "Created for Solana Hackathon",
 };
 

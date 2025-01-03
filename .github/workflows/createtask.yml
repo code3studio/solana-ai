@@ -1,0 +1,19 @@
+name: Create Task
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # Runs every 5 minutes
+
+jobs:
+  test-cron-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log Current Time
+        run: echo "Cron job executed at $(date)"
+
+      - name: Call API
+        run: |
+          curl -X POST "https://solana-ai-alpha.vercel.app/api/tasks/create" \
+          -H "Content-Type: application/json" \
+          -d '{"durationHours": 21}'
