@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, cache } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -12,6 +12,9 @@ import { Task } from "@/types/challenge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+
+export const revalidate = 60
+
 
 const TaskDashboard = () => {
   const [task, setTask] = useState<Task[] | null>(null);
