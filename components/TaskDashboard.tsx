@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, cache } from "react";
 import {
   Card,
   CardContent,
@@ -54,7 +54,7 @@ const TaskDashboard = () => {
 
   const fetchActiveTask = async () => {
     try {
-      const response = await fetch("/api/tasks/active");
+      const response = await fetch("/api/tasks/active", { cache: "no-cache" });
       if (response.ok) {
         const data = await response.json();
         setTask(data.task);
@@ -119,9 +119,8 @@ const TaskDashboard = () => {
                 <Clock className="h-5 w-5" />
                 <span className="font-medium">
                   {timers[t._id]
-                    ? `${timers[t._id].hours}h ${timers[t._id].minutes}m ${
-                        timers[t._id].seconds
-                      }s`
+                    ? `${timers[t._id].hours}h ${timers[t._id].minutes}m ${timers[t._id].seconds
+                    }s`
                     : "Calculating..."}
                 </span>
               </div>
