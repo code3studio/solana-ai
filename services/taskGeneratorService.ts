@@ -48,7 +48,7 @@ export class TaskGeneratorService {
     const db = client.db('tweetcontest');
 
     const startTime = new Date();
-    const endTime = new Date(startTime.getTime() + durationHours * 60 * 1000);
+    const endTime = new Date(startTime.getTime() + durationHours * 60 * 60 * 1000);
 
     const result = await db.collection('tasks').insertOne({
       ...task,
