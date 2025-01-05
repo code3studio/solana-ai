@@ -85,6 +85,12 @@ export class TaskGeneratorService {
     );
   }
 
+  public static async getPastTasks() {
+    const client = await clientPromise;
+    const db = client.db('tweetcontest');
+    return db.collection('tasks').find({ isActive: false }).toArray();
+  }
+
   public static async setTaskWinner(taskId: string, winnerId: string) {
     const client = await clientPromise;
     const db = client.db('tweetcontest');
