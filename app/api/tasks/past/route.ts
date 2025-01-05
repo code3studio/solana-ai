@@ -1,6 +1,6 @@
 import { TaskGeneratorService } from "@/services/taskGeneratorService";
 import { NextResponse } from "next/server";
-
+export const revalidate = 0;
 
 const GET = async () => {
     try {
