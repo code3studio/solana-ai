@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import { adaptTwitterResponse } from '@/lib/adapters';
 import { TwitterApiTweet } from '@/lib/types';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { ObjectId } from 'mongodb';
 import clientPromise from '@/lib/clientpromise';
 import { Task } from '@/types/challenge';
 
@@ -18,7 +17,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 function calculateEngagementScore(metrics: { like_count: number, retweet_count: number, reply_count: number, impression_count: number }) {
   const { like_count, retweet_count, reply_count, impression_count } = metrics;
-  
+
   // Normalize engagement metrics
   const engagementRate = (like_count + retweet_count + reply_count) / impression_count;
   return Math.min(Math.round(engagementRate * 1000), 100); // Score out of 100
@@ -26,7 +25,7 @@ function calculateEngagementScore(metrics: { like_count: number, retweet_count: 
 
 async function evaluateTweetContent(tweetText: string, task: Task) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  
+
   const prompt = `
     Task Requirements: ${task.requirements.join(', ')}
     Tweet Content: "${tweetText}"
@@ -70,7 +69,7 @@ async function fetchTweetData(tweetId: string) {
 export async function POST(request: Request) {
   try {
     const { url, taskData } = await request.json();
-    
+
     const tweetId = url.split('/status/')[1]?.split('?')[0];
     if (!tweetId) {
       return NextResponse.json(
@@ -88,10 +87,10 @@ export async function POST(request: Request) {
 
     // Calculate engagement score
     const engagementScore = calculateEngagementScore(adaptedTweet.public_metrics);
-    
+
     // Evaluate content
     const contentEvaluation = await evaluateTweetContent(adaptedTweet.text, taskData);
-    
+
     // Calculate overall score
     const overallScore = Math.round(
       (engagementScore + contentEvaluation.relevanceScore + contentEvaluation.contentQuality) / 3
@@ -102,7 +101,7 @@ export async function POST(request: Request) {
     const db = client.db('tweetcontest');
 
     const submission = {
-      taskId: new ObjectId(taskData._id),
+      taskId: taskData._id,
       tweetId: adaptedTweet.id,
       authorId: adaptedTweet.author_id,
       authorUsername: adaptedTweet.authorName,
@@ -123,7 +122,7 @@ export async function POST(request: Request) {
     await db.collection('submissions').insertOne(submission);
 
     return NextResponse.json({
-      result:{
+      result: {
         relevanceScore: contentEvaluation.relevanceScore,
         engagementScore,
         contentQuality: contentEvaluation.contentQuality,

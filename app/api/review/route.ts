@@ -2,13 +2,12 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Task } from '@/types/challenge';
 import clientPromise from '@/lib/clientpromise';
-import { ObjectId } from 'mongodb';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 function calculateEngagementScore(metrics: { like_count: number, retweet_count: number, reply_count: number, impression_count: number }) {
   const { like_count, retweet_count, reply_count, impression_count } = metrics;
-  
+
   // Normalize engagement metrics
   const engagementRate = (like_count + retweet_count + reply_count) / impression_count;
   return Math.min(Math.round(engagementRate * 1000), 100); // Score out of 100
@@ -16,7 +15,7 @@ function calculateEngagementScore(metrics: { like_count: number, retweet_count: 
 
 async function evaluateTweetContent(tweetText: string, task: Task) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  
+
   const prompt = `
     Task Requirements: ${task.requirements.join(', ')}
     Tweet Content: "${tweetText}"
@@ -42,13 +41,13 @@ async function evaluateTweetContent(tweetText: string, task: Task) {
 export async function POST(request: Request) {
   try {
     const { data: tweetData, taskId, taskData } = await request.json();
-    
+
     // Calculate engagement score
     const engagementScore = calculateEngagementScore(tweetData.public_metrics);
-    
+
     // Evaluate content
     const contentEvaluation = await evaluateTweetContent(tweetData.text, taskData);
-    
+
     // Calculate overall score
     const overallScore = Math.round(
       (engagementScore + contentEvaluation.relevanceScore + contentEvaluation.contentQuality) / 3
@@ -59,7 +58,7 @@ export async function POST(request: Request) {
     const db = client.db('tweetcontest');
 
     const submission = {
-      taskId: new ObjectId(taskId),
+      taskId: taskId,
       tweetId: tweetData.id,
       authorId: tweetData.author_id,
       authorUsername: tweetData.author.username,

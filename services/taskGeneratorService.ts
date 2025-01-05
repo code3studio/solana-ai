@@ -43,12 +43,12 @@ export class TaskGeneratorService {
 
   public static async createNewTask(durationHours: number = 4): Promise<string> {
     const task = await this.generateTaskWithAI();
-    
+
     const client = await clientPromise;
     const db = client.db('tweetcontest');
 
     const startTime = new Date();
-    const endTime = new Date(startTime.getTime() + durationHours * 60 * 60 * 1000);
+    const endTime = new Date(startTime.getTime() + durationHours * 60 * 1000);
 
     const result = await db.collection('tasks').insertOne({
       ...task,
@@ -65,7 +65,8 @@ export class TaskGeneratorService {
   public static async getActiveTask() {
     const client = await clientPromise;
     const db = client.db('tweetcontest');
-    // Return the all active task
+    // if task has ended, set isActive to false
+    await this.checkTaskStatus();
     return db.collection('tasks').find({ isActive: true }).toArray();
   }
 
