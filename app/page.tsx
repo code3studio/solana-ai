@@ -17,7 +17,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400"
           >
-            Web3 Innovators Hub
+            BountyAi
           </motion.h1>
 
           <motion.p
@@ -37,10 +37,10 @@ export default function LandingPage() {
             className="flex justify-center mb-20 sm:mb-32"
           >
             <Link
-              href="#"
+              href="https://github.com/bountyai/bountyai"
               className="px-8 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105"
             >
-              Get Started
+              Start Now
             </Link>
           </motion.div>
         </section>
@@ -113,7 +113,7 @@ export default function LandingPage() {
             learn and grow while earning crypto rewards.
           </motion.p>
           <Link
-            href="#"
+            href="https://github.com/bountyai/bountyai"
             className="px-8 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105"
           >
             Start Innovating

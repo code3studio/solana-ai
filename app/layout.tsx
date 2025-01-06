@@ -5,8 +5,8 @@ import { Navbar } from "@/components/global/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "@/components/ui/toaster";
-import AppWalletProvider from "@/components/AppWalletProvider";
 import Footer from "@/components/global/footer";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -19,8 +19,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Bounty Quest",
-  description: "Created for Solana Hackathon",
+  title: "BountyAI",
+  description: "Solana-based AI platform for bounty creation and rewards.",
 };
 
 export default function RootLayout({
@@ -30,22 +30,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        <link rel="icon" href="/logonobg.png" sizes="any" type="image/png" />
+        <title>BountyAI</title>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AppWalletProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <main className="min-h-screen pt-16">{children}</main>
-            <Footer />
-            <Toaster />
-          </ThemeProvider>
-        </AppWalletProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main className="min-h-screen pt-16">{children}</main>
+          <Footer />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

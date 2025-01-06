@@ -1,6 +1,6 @@
 import React from "react";
 import { Twitter, Linkedin, Youtube } from "lucide-react";
-
+import { FaGithub, FaTelegramPlane } from "react-icons/fa"; // Import icons from React Icons
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -11,33 +11,37 @@ const Footer = () => {
           {/* Project Name */}
           <div className="order-1 sm:order-none">
             <span className="text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-              BountyQuest
+              BountyAI.fun 
             </span>
           </div>
 
           {/* Social Links */}
           <div className="order-3 sm:order-none flex items-center justify-center space-x-8">
             <a
-              href="#"
+              href="https://x.com/BountyDotFun"
               className="group flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/50 hover:bg-blue-500/10 transition-all duration-300"
               aria-label="Twitter"
             >
               <Twitter className="w-4 h-4 text-slate-400 group-hover:text-blue-400 transition-colors" />
             </a>
-            <a
-              href="#"
-              className="group flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/50 hover:bg-blue-600/10 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
-            </a>
-            <a
-              href="#"
-              className="group flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/50 hover:bg-red-500/10 transition-all duration-300"
-              aria-label="YouTube"
-            >
-              <Youtube className="w-4 h-4 text-slate-400 group-hover:text-red-500 transition-colors" />
-            </a>
+
+<a
+  href="https://t.me/bountydotfun"
+  className="group flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/50 hover:bg-blue-400/10 transition-all duration-300"
+  aria-label="Telegram"
+>
+  <FaTelegramPlane className="w-4 h-4 text-slate-400 group-hover:text-blue-400 transition-colors" />
+</a>
+<a
+  href="https://github.com/bountyai/bountyai"
+  className="group flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/50 hover:bg-gray-600/10 transition-all duration-300"
+  aria-label="GitHub"
+>
+  <FaGithub className="w-4 h-4 text-slate-400 group-hover:text-gray-400 transition-colors" />
+</a>
+
+
+
           </div>
 
           {/* Links */}

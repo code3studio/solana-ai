@@ -5,14 +5,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import ModeToggle from "./darkmode";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Image from "next/image";
 
 const routes = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/tasks", label: "Tasks" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About" },
+  { href: "https://t.me/bountydotfun", label: "Telegram" },
+  { href: "https://x.com/BountyDotFun", label: "Twitter" },
+  { href: "https://github.com/bountyai/bountyai", label: "Github" },
 ];
 
 export function Navbar() {
@@ -23,7 +23,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center px-4">
         <div className="flex items-center space-x-4">
           <Link href="/" className="font-bold text-xl">
-            <Image src={"/solana-logo.png"} width={40} height={40} alt="Logo" />
+            <Image src={"/logonobg.png"} width={40} height={40} alt="Logo" />
           </Link>
         </div>
 
@@ -38,14 +38,8 @@ export function Navbar() {
               {route.label}
             </Link>
           ))}
-          <WalletMultiButton
-            style={{
-              backgroundColor: "var(--geist-foreground)",
-              color: "var(--geist-background)",
-              scale: "small",
-              padding: "0.5rem 1rem",
-            }}
-          />
+    
+      
           <ModeToggle />
         </div>
 
@@ -74,7 +68,7 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
           <ModeToggle />
-          <WalletMultiButton />
+      
         </div>
       </div>
     </nav>
