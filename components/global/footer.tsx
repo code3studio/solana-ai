@@ -1,5 +1,5 @@
 import React from "react";
-import { Twitter, Linkedin, Youtube } from "lucide-react";
+import { Twitter, } from "lucide-react";
 import { FaGithub, FaTelegramPlane } from "react-icons/fa"; // Import icons from React Icons
 const Footer = () => {
   const currentYear = new Date().getFullYear();
