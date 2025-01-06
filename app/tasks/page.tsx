@@ -1,14 +1,28 @@
 // app/tasks/page.tsx
+import PastTask from "@/components/PastTask";
 import TaskDashboard from "@/components/TaskDashboard";
 
 export default function TasksPage() {
   return (
-    <main className="min-h-screen py-8">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">
+    <main className="min-h-screen py-12">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-12">
           Crypto Twitter Challenge
         </h1>
-        <TaskDashboard />
+
+        <div className="mb-16">
+          <h2 className="text-2xl font-semibold mb-6 pb-3">
+            Today&apos;s Tasks
+          </h2>
+          <TaskDashboard />
+        </div>
+
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-6 pb-3">
+            Previous Tasks History
+          </h2>
+          <PastTask />
+        </div>
       </div>
     </main>
   );

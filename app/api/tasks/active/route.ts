@@ -1,11 +1,11 @@
 // app/api/tasks/active/route.ts
 import { NextResponse } from 'next/server';
 import { TaskGeneratorService } from '@/services/taskGeneratorService';
-
+export const revalidate = 0;
 export async function GET() {
   try {
     const activeTasks = await TaskGeneratorService.getActiveTask();
-    
+
     if (!activeTasks || activeTasks.length === 0) {
       return NextResponse.json(
         { error: 'No active task found' },

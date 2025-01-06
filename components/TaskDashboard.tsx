@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
+export const revalidate = 60
+
+
 const TaskDashboard = () => {
   const [task, setTask] = useState<Task[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +41,9 @@ const TaskDashboard = () => {
         const endTime = new Date(t.endTime).getTime();
         const now = new Date().getTime();
         const timeLeft = endTime - now;
+        if (timeLeft < 0) {
+          return;
+        }
         const hours = Math.floor(
           (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
@@ -54,7 +60,7 @@ const TaskDashboard = () => {
 
   const fetchActiveTask = async () => {
     try {
-      const response = await fetch("/api/tasks/active");
+      const response = await fetch("/api/tasks/active", { cache: "no-cache" });
       if (response.ok) {
         const data = await response.json();
         setTask(data.task);
@@ -96,7 +102,7 @@ const TaskDashboard = () => {
           <CardHeader className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 pb-4">
             <div className="flex items-center justify-between">
               <Badge variant="outline" className="bg-white/90 dark:bg-gray-800">
-                Active Challenge
+                {!timers[t._id] ? "Expired" : "Active"}
               </Badge>
               <Trophy className="h-6 w-6 text-yellow-500" />
             </div>
@@ -119,9 +125,8 @@ const TaskDashboard = () => {
                 <Clock className="h-5 w-5" />
                 <span className="font-medium">
                   {timers[t._id]
-                    ? `${timers[t._id].hours}h ${timers[t._id].minutes}m ${
-                        timers[t._id].seconds
-                      }s`
+                    ? `${timers[t._id].hours}h ${timers[t._id].minutes}m ${timers[t._id].seconds
+                    }s`
                     : "Calculating..."}
                 </span>
               </div>
